@@ -1,3 +1,6 @@
+@import '../../styles/variables.scss';
+@import '../../styles/functions.scss';
+
 .header {
   position: fixed;
   top: 0;
@@ -6,12 +9,121 @@
 
   width: 100%;
 
-  background-color: white;
+  background-color: $white;
+
+  &__inner {
+    display: flex;
+    align-items: center;
+  }
+
+  &__right {
+    flex: 0 1 451px;
+  }
+
+  &__middle {
+    flex: 1 1 auto;
+  }
+
+  &__left {
+    flex: 0 1 170px;
+  }
+
+  &__block {
+    display: flex;
+    align-items: center;
+  }
+
+  &__logo {
+    flex: 0 1 115px;
+
+    > a {
+      font-weight: bold;
+      font-size: 24px;
+      line-height: 29px;
+
+      color: #000000;
+    }
+  }
 }
 
-.nav-header {
+.headerNav {
+  flex: 0 1 336px;
+
   &__list {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  &__item {
+    cursor: pointer;
+
+    flex: 0 1 calc((100% / 3) - 20px);
+
+    margin: 0 10px;
+  }
+}
+
+.headerForm {
+  position: relative;
+
+  flex: 0 1 472px;
+
+  &__icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 44px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__input {
+    position: relative;
+
+    > input {
+      width: 100%;
+
+      border: none;
+    }
+
+    > label {
+      position: absolute;
+      top: 50%;
+      left: 0;
+
+      white-space: nowrap;
+
+      transform: translate(0, -50%);
+    }
+  }
+}
+
+.headerActions {
+  flex: auto;
+
+  &__list {
+    display: flex;
+    align-items: center;
+  }
+
+  &__item {
+    cursor: pointer;
+
+    flex: auto;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    margin: 0 5px;
+
+    &:last-child {
+      margin-right: 0;
+    }
   }
 }

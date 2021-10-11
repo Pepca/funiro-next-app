@@ -16,7 +16,9 @@ const MainLayout = ({children}: TLayoutsProps) => {
         <meta name='description' content='Funiro internet-shop using Next framework!' />
         <title>Funiro app</title>
       </Head>
-      {children}
+      <div className='wrapper'>
+        <main className='page-content _container'>{children}</main>
+      </div>
     </>
   )
 }

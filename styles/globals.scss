@@ -2,9 +2,12 @@
 @import 'variables';
 @import 'mixin';
 @import 'font';
+@import 'functions';
 
 body {
-  font-family: -apple-system, Gilroy, sans-serif;
+  font-family: Gilroy, sans-serif;
+
+  color: $mainTextColor;
 }
 
 a {
@@ -13,7 +16,9 @@ a {
 }
 
 button {
+  color: inherit;
   background-color: transparent;
+
   border: none;
 }
 
@@ -31,4 +36,11 @@ button {
   flex-direction: column;
 
   overflow: hidden;
+}
+
+._container {
+  max-width: $maxWidthContainer + px;
+
+  margin: 0 auto;
+  padding: 0 15px;
 }

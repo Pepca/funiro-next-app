@@ -4,10 +4,27 @@
 $mainBackgroundColor: #f9f1e7;
 
 .intro {
+  position: relative;
+
   width: 100vw;
   height: 100vh;
 
   background-color: $mainBackgroundColor;
+
+  &:after {
+    content: '';
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+
+    width: calc(546 / $maxWidth * 100%);
+    height: 100%;
+
+    background-color: #fcf8f3;
+  }
+
   &__inner {
     padding-top: calc(40px + 45px + 66px);
   }
@@ -16,10 +33,11 @@ $mainBackgroundColor: #f9f1e7;
 .controlsIntroSlider {
   display: flex;
   align-items: center;
-  justify-content: center;
 }
 
 .dotsControlsIntroSlider {
+  flex: auto;
+
   &__list {
     display: flex;
     align-items: center;
@@ -36,23 +54,44 @@ $mainBackgroundColor: #f9f1e7;
     width: 27px;
     height: 27px;
 
-    border: 1px solid $orange;
     border-radius: 50%;
 
     margin: 0 6px;
+
+    border-width: 0;
+    border-style: solid;
+    border-color: $orange;
+
+    transition: all 0.2s ease;
 
     > span {
       width: 11px;
       height: 11px;
 
-      background-color: $orange;
+      background-color: $gray;
 
       border-radius: inherit;
+
+      transition: all 0.2s ease;
+    }
+
+    &.activeDot {
+      border-width: 1px;
+
+      > span {
+        background-color: $orange;
+      }
     }
   }
 }
 
+.activeDot {
+}
+
 .arrowsControlsIntroSlider {
+  position: relative;
+  z-index: 5;
+
   display: flex;
   align-items: center;
 
@@ -70,25 +109,10 @@ $mainBackgroundColor: #f9f1e7;
 
     background-color: $orange;
 
+    margin: 0 4px;
+
     &Left {
-      opacity: 0.3;
-
-      > svg {
-        opacity: 1;
-        > path {
-          stroke: $orange;
-        }
-      }
-    }
-
-    &Right {
-      opacity: 1;
-
-      > svg {
-        > path {
-          stroke: $white;
-        }
-      }
+      background-color: rgba($orange, 0.3);
     }
   }
 }

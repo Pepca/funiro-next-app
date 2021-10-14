@@ -1,7 +1,19 @@
+// Modules
+import {IIntroSliders} from '../interfaces'
+import useSwr from 'swr'
+import Image from 'next/image'
+
 // Styles
 import css from './Intro.module.scss'
 
+const fetcher = (url: string) => fetch(url).then((res) => res.json())
+
 const Intro = () => {
+  const {data, error} = useSwr('/api/intro_slider', fetcher)
+  const sliders: IIntroSliders[] = data ?? false
+
+  console.log(sliders)
+
   return (
     <>
       <div className={css.intro}>
@@ -10,7 +22,7 @@ const Intro = () => {
             <div className={`${css.controlsIntroSlider} _container`}>
               <div className={css.dotsControlsIntroSlider}>
                 <ul className={css.dotsControlsIntroSlider__list}>
-                  <li className={css.dotsControlsIntroSlider__item}>
+                  <li className={`${css.dotsControlsIntroSlider__item} ${css.activeDot}`}>
                     <span />
                   </li>
                   <li className={css.dotsControlsIntroSlider__item}>
@@ -46,7 +58,7 @@ const Intro = () => {
                   <svg width='24' height='24' viewBox='0 0 24 24' fill='none'>
                     <path
                       d='M9.00012 4.99999L16.0001 12L9.00012 19'
-                      stroke='#E89F71'
+                      stroke='white'
                       strokeWidth='1.8'
                       strokeLinecap='round'
                       strokeLinejoin='round'
@@ -54,6 +66,16 @@ const Intro = () => {
                   </svg>
                 </button>
               </div>
+            </div>
+            <div className='intro-sliders__container'>
+              <ul className='container-intro-sliders__list'>
+                {sliders &&
+                  sliders.map((slide) => (
+                    <li key={slide.id} className='container-intro-sliders__item'>
+                      <Image src={slide.images.src} alt='' layout='fill' />
+                    </li>
+                  ))}
+              </ul>
             </div>
           </div>
         </div>

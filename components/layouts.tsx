@@ -17,7 +17,7 @@ const MainLayout = ({children}: TLayoutsProps) => {
         <title>Funiro app</title>
       </Head>
       <div className='wrapper'>
-        <main className='page-content _container'>{children}</main>
+        <main className='page-content'>{children}</main>
       </div>
     </>
   )

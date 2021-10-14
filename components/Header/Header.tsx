@@ -23,9 +23,49 @@ const Header = () => {
           </div>
           <nav className={css.headerNav}>
             <ul className={css.headerNav__list}>
-              <li className={css.headerNav__item}>Products</li>
-              <li className={css.headerNav__item}>Rooms</li>
-              <li className={css.headerNav__item}>Inspirations</li>
+              <li className={`${css.headerNav__item} ${css._withSubmenu}`}>
+                <span>Products</span>
+                <i className={css.headerNavItem__arrow}>
+                  <svg width='20' height='20' viewBox='0 0 20 20' fill='none'>
+                    <path
+                      d='M15.8334 7.50006L10 13.3334L4.16671 7.50006'
+                      stroke='#3A3A3A'
+                      strokeWidth='1.8'
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                    />
+                  </svg>
+                </i>
+                <div className={css.headerNavItemSubmenu}>
+                  <ul className={css.headerNavItemSubmenu__list}>
+                    <li className={css.headerNavItemSubmenu__item}>Rooms</li>
+                  </ul>
+                </div>
+              </li>
+              <li className={`${css.headerNav__item} ${css._withSubmenu}`}>
+                <span>Rooms</span>
+                <i className={css.headerNavItem__arrow}>
+                  <svg width='20' height='20' viewBox='0 0 20 20' fill='none'>
+                    <path
+                      d='M15.8334 7.50006L10 13.3334L4.16671 7.50006'
+                      stroke='#3A3A3A'
+                      strokeWidth='1.8'
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                    />
+                  </svg>
+                </i>
+                <div className={css.headerNavItemSubmenu}>
+                  <ul className={css.headerNavItemSubmenu__list}>
+                    <li className={css.headerNavItemSubmenu__item}>Rooms</li>
+                    <li className={css.headerNavItemSubmenu__item}>Rooms</li>
+                    <li className={css.headerNavItemSubmenu__item}>Rooms</li>
+                  </ul>
+                </div>
+              </li>
+              <li className={css.headerNav__item}>
+                <span>Inspirations</span>
+              </li>
             </ul>
           </nav>
         </div>
@@ -52,7 +92,10 @@ const Header = () => {
                 value={searchValue}
                 onChange={(event: ChangeEvent<HTMLInputElement>) => setSearchValue(event.target.value)}
               />
-              <label htmlFor='search'>Search for minimalist chair</label>
+
+              <label htmlFor='search' style={searchValue !== '' ? {left: '15px', opacity: '0', visibility: 'hidden'} : {}}>
+                Search for minimalist chair
+              </label>
             </div>
           </form>
         </div>

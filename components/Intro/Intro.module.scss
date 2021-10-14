@@ -1,0 +1,94 @@
+@import '../../styles//variables.scss';
+
+// Variables
+$mainBackgroundColor: #f9f1e7;
+
+.intro {
+  width: 100vw;
+  height: 100vh;
+
+  background-color: $mainBackgroundColor;
+  &__inner {
+    padding-top: calc(40px + 45px + 66px);
+  }
+}
+
+.controlsIntroSlider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dotsControlsIntroSlider {
+  &__list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__item {
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 27px;
+    height: 27px;
+
+    border: 1px solid $orange;
+    border-radius: 50%;
+
+    margin: 0 6px;
+
+    > span {
+      width: 11px;
+      height: 11px;
+
+      background-color: $orange;
+
+      border-radius: inherit;
+    }
+  }
+}
+
+.arrowsControlsIntroSlider {
+  display: flex;
+  align-items: center;
+
+  &__btn {
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 48px;
+    height: 48px;
+
+    border-radius: 50%;
+
+    background-color: $orange;
+
+    &Left {
+      opacity: 0.3;
+
+      > svg {
+        opacity: 1;
+        > path {
+          stroke: $orange;
+        }
+      }
+    }
+
+    &Right {
+      opacity: 1;
+
+      > svg {
+        > path {
+          stroke: $white;
+        }
+      }
+    }
+  }
+}

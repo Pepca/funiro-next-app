@@ -9,7 +9,9 @@
 
   width: 100%;
 
-  background-color: $white;
+  background-color: transparent;
+
+  margin-top: 40px;
 
   &__inner {
     display: flex;
@@ -17,7 +19,7 @@
   }
 
   &__right {
-    flex: 0 1 451px;
+    flex: 0 1 481px;
   }
 
   &__middle {
@@ -47,7 +49,7 @@
 }
 
 .headerNav {
-  flex: 0 1 336px;
+  flex: 0 1 366px;
 
   &__list {
     display: flex;
@@ -58,47 +60,147 @@
 
   &__item {
     cursor: pointer;
+    position: relative;
 
     flex: 0 1 calc((100% / 3) - 20px);
 
     margin: 0 10px;
+
+    display: flex;
+    align-items: center;
+
+    &:not(._withSubmenu) {
+      > span {
+        position: relative;
+
+        &:after {
+          content: '';
+
+          position: absolute;
+          bottom: -2px;
+          left: 0;
+
+          width: 100%;
+          height: 1px;
+
+          background-color: $mainTextColor;
+
+          transform: scale(0);
+
+          transition: all 0.2s ease;
+        }
+      }
+
+      &:hover {
+        > span {
+          &:after {
+            transform: scale(1);
+          }
+        }
+      }
+    }
+
+    .headerNavItem__arrow {
+      margin-left: 8px;
+
+      transition: all 0.2s ease;
+    }
+
+    &._withSubmenu {
+      &:hover {
+        > .headerNavItemSubmenu {
+          top: 100%;
+
+          opacity: 1;
+          visibility: visible;
+        }
+
+        > .headerNavItem__arrow {
+          transform: rotate(180deg) translateY(10%);
+        }
+      }
+    }
+  }
+}
+
+._withSubmenu {
+}
+
+.headerNavItemSubmenu {
+  position: absolute;
+  top: 120%;
+  left: 0;
+
+  opacity: 0;
+  visibility: hidden;
+
+  transition: all 0.2s ease;
+
+  &__list {
+  }
+
+  &__item {
+    margin: 10px 0;
   }
 }
 
 .headerForm {
-  position: relative;
-
   flex: 0 1 472px;
+  height: 45px;
+
+  display: flex;
+  align-items: center;
+
+  background-color: $white;
 
   &__icon {
-    position: absolute;
-    top: 0;
-    left: 0;
-
     width: 44px;
+    height: 100%;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    > button {
+      cursor: pointer;
+
+      width: 100%;
+      height: 100%;
+    }
   }
 
   &__input {
     position: relative;
 
+    width: 100%;
+    height: 100%;
+
     > input {
       width: 100%;
+      height: 100%;
 
       border: none;
+
+      font-size: 14px;
+
+      padding-right: 15px;
+
+      &:focus {
+        outline: 0;
+      }
     }
 
     > label {
       position: absolute;
       top: 50%;
-      left: 0;
+      left: 2px;
+
+      pointer-events: none;
 
       white-space: nowrap;
 
       transform: translate(0, -50%);
+
+      opacity: 1;
+      visibility: visible;
+
+      transition: all 0.1s ease;
     }
   }
 }
@@ -117,10 +219,10 @@
     flex: auto;
 
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
 
-    margin: 0 5px;
+    margin: 0 adaptive-value(10, 5);
 
     &:last-child {
       margin-right: 0;

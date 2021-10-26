@@ -1,4 +1,4 @@
-@import '../../styles//variables.scss';
+@import '../../styles/variables.scss';
 
 // Variables
 $mainBackgroundColor: #f9f1e7;
@@ -17,15 +17,17 @@ $mainBackgroundColor: #f9f1e7;
     position: absolute;
     top: 0;
     right: 0;
-    z-index: 1;
 
-    width: calc(546 / $maxWidth * 100%);
+    width: calc(546 / 1440 * 100%);
     height: 100%;
 
     background-color: #fcf8f3;
   }
 
   &__inner {
+    position: relative;
+    z-index: 2;
+
     padding-top: calc(40px + 45px + 66px);
   }
 }
@@ -113,6 +115,31 @@ $mainBackgroundColor: #f9f1e7;
 
     &Left {
       background-color: rgba($orange, 0.3);
+    }
+  }
+}
+
+.introSlidersContainer {
+  position: relative;
+
+  margin-top: 50px;
+
+  &__list {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    display: flex;
+    align-items: center;
+
+    transition: left .5s ease;
+  }
+
+  &__item {
+    margin-left: 50px;
+
+    &:first-child {
+      margin-left: 0;
     }
   }
 }

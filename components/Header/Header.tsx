@@ -1,5 +1,5 @@
 // Module
-import React, {ChangeEvent, useState} from 'react'
+import React, { ChangeEvent, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 
@@ -90,10 +90,19 @@ const Header = () => {
                 id='search'
                 name='search'
                 value={searchValue}
-                onChange={(event: ChangeEvent<HTMLInputElement>) => setSearchValue(event.target.value)}
+                onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                  setSearchValue(event.target.value)
+                }
               />
 
-              <label htmlFor='search' style={searchValue !== '' ? {left: '15px', opacity: '0', visibility: 'hidden'} : {}}>
+              <label
+                htmlFor='search'
+                style={
+                  searchValue !== ''
+                    ? { left: '15px', opacity: '0', visibility: 'hidden' }
+                    : {}
+                }
+              >
                 Search for minimalist chair
               </label>
             </div>
@@ -120,8 +129,20 @@ const Header = () => {
                     strokeLinecap='round'
                     strokeLinejoin='round'
                   />
-                  <circle cx='8.5' cy='19' r='2' stroke='#262F56' strokeWidth='1.8' />
-                  <circle cx='18' cy='19' r='2' stroke='#262F56' strokeWidth='1.8' />
+                  <circle
+                    cx='8.5'
+                    cy='19'
+                    r='2'
+                    stroke='#262F56'
+                    strokeWidth='1.8'
+                  />
+                  <circle
+                    cx='18'
+                    cy='19'
+                    r='2'
+                    stroke='#262F56'
+                    strokeWidth='1.8'
+                  />
                 </svg>
               </li>
               <li className={css.headerActions__item}>

@@ -1,5 +1,5 @@
 // Modules
-import React, { useState } from 'react'
+import React, {useState} from 'react'
 import {IIntroSliders} from '../interfaces'
 import Image from 'next/image'
 import useSWR from 'swr'
@@ -7,22 +7,30 @@ import useSWR from 'swr'
 // Styles
 import css from './Intro.module.scss'
 
+// Media
+import Slide1 from '../../public/images/slide1.jpg'
+
 const fetcher = (url: string) => fetch(url).then((res) => res.json())
 
 const Intro = () => {
   // Data
-  const {data, error} = useSWR('http://localhost:3000/api/introSlider', fetcher)
+  const {data, error} = useSWR(
+    'http://localhost:3000/api/introSlider',
+    fetcher
+  )
   const sliders: IIntroSliders[] = data ?? false
 
   // State
   const [sliderCounter, setSliderCounter] = useState<number>(0)
 
   const handleSlideLeft = (): void => {
-    setSliderCounter((prev) => prev === 0 ? sliders.length -1 : prev - 1)
+    setSliderCounter((prev) => (prev === 0 ? sliders.length - 1 : prev - 1))
   }
 
   const handleSlideRight = (): void => {
-    setSliderCounter((prev) => prev === sliders.length -1 ? prev = 0 : prev + 1)
+    setSliderCounter((prev) =>
+      prev === sliders.length - 1 ? (prev = 0) : prev + 1
+    )
   }
 
   return (
@@ -35,7 +43,10 @@ const Intro = () => {
                 <ul className={css.dotsControlsIntroSlider__list}>
                   {sliders &&
                   sliders.map((slide) => (
-                    <li key={slide.id} className={css.dotsControlsIntroSlider__item}>
+                    <li
+                      key={slide.id}
+                      className={css.dotsControlsIntroSlider__item}
+                    >
                       <span/>
                     </li>
                   ))}
@@ -75,11 +86,21 @@ const Intro = () => {
               </div>
             </div>
             <div className={css.introSlidersContainer}>
-              <ul className={css.introSlidersContainer__list} style={{left: (-934 - 50) * sliderCounter}}>
+              <ul
+                className={css.introSlidersContainer__list}
+                style={{transform: `translateX(${sliderCounter === sliders.length - 1 ? -(934 + 100) * sliders.length + 1920 : -(934 + 100) * sliderCounter}px)`}}
+              >
                 {sliders &&
                 sliders.map((slide) => (
-                  <li key={slide.id} className={css.introSlidersContainer__item}>
-                    <Image src={slide.image} alt={`Slide ${slide.id}`} layout='fixed'/>
+                  <li
+                    key={slide.id}
+                    className={css.introSlidersContainer__item}
+                  >
+                    <Image
+                      src={Slide1}
+                      alt={`Slide ${slide.id}`}
+                      layout="fixed"
+                    />
                   </li>
                 ))}
               </ul>

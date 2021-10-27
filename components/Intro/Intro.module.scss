@@ -132,14 +132,10 @@ $mainBackgroundColor: #f9f1e7;
     display: flex;
     align-items: center;
 
-    transition: left .5s ease;
+    transition: all 0.5s ease;
   }
 
   &__item {
-    margin-left: 50px;
-
-    &:first-child {
-      margin-left: 0;
-    }
+    margin: 50px;
   }
 }

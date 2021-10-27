@@ -1,5 +1,5 @@
 export interface IIntroSliders {
-  id: string | number
+  id: number
   image: StaticImageData
   name: string
   description: string

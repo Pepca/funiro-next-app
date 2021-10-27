@@ -14,10 +14,7 @@ const fetcher = (url: string) => fetch(url).then((res) => res.json())
 
 const Intro = () => {
   // Data
-  const {data, error} = useSWR(
-    'http://localhost:3000/api/introSlider',
-    fetcher
-  )
+  const {data, error} = useSWR('http://localhost:3000/api/introSlider', fetcher)
   const sliders: IIntroSliders[] = data ?? false
 
   // State
@@ -29,8 +26,13 @@ const Intro = () => {
 
   const handleSlideRight = (): void => {
     setSliderCounter((prev) =>
-      prev === sliders.length - 1 ? (prev = 0) : prev + 1
+      prev === sliders.length - 1 ? 0 : prev + 1
     )
+  }
+
+  const handleDotClick = (id: number): void => {
+    const currentElement = sliders.filter(fsSlide => fsSlide.id === id)
+    setSliderCounter(() => sliders.indexOf(currentElement[0]))
   }
 
   return (
@@ -45,7 +47,8 @@ const Intro = () => {
                   sliders.map((slide) => (
                     <li
                       key={slide.id}
-                      className={css.dotsControlsIntroSlider__item}
+                      className={`${css.dotsControlsIntroSlider__item}${slide.id === sliders[sliderCounter].id ? ` ${css.activeDot}` : ''}`}
+                      onClick={() => handleDotClick(slide.id)}
                     >
                       <span/>
                     </li>
@@ -88,7 +91,7 @@ const Intro = () => {
             <div className={css.introSlidersContainer}>
               <ul
                 className={css.introSlidersContainer__list}
-                style={{transform: `translateX(${sliderCounter === sliders.length - 1 ? -(934 + 100) * sliders.length + 1920 : -(934 + 100) * sliderCounter}px)`}}
+                style={{transform: `translateX(${sliderCounter === sliders.length - 1 ? -(934 + 100) * sliders.length + 1920 : -((934 + 100) - 300) * sliderCounter}px)`}}
               >
                 {sliders &&
                 sliders.map((slide) => (

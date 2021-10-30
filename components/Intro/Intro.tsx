@@ -1,8 +1,9 @@
 // Modules
-import React, {useState} from 'react'
+import React, {MouseEventHandler, useEffect, useState} from 'react'
 import {IIntroSliders} from '../interfaces'
 import Image from 'next/image'
 import useSWR from 'swr'
+import {useWindowDimensions} from '../customHooks'
 
 // Styles
 import css from './Intro.module.scss'
@@ -19,6 +20,13 @@ const Intro = () => {
 
   // State
   const [sliderCounter, setSliderCounter] = useState<number>(0)
+  const [windowWidth, setWindowWidth] = useState<number>(0)
+  const [isDragging, setIsDragging] = useState<boolean>(false)
+  const [startNewTransform, setStartNewTransform] = useState<number>(0)
+
+  // Variables
+  const faultMargin: number = 32
+  const randomOffset: number = 300
 
   const handleSlideLeft = (): void => {
     setSliderCounter((prev) => (prev === 0 ? sliders.length - 1 : prev - 1))
@@ -34,6 +42,26 @@ const Intro = () => {
     const currentElement = sliders.filter(fsSlide => fsSlide.id === id)
     setSliderCounter(() => sliders.indexOf(currentElement[0]))
   }
+
+  const handleListMouseDown: MouseEventHandler = (event): void => {
+    setStartNewTransform(() => event.clientX)
+  }
+
+  // const handleListMouseMove = (event: MouseEvent): void => {
+  //   if (isDragging) {
+  //     const startPoint = event.clientX
+  //   }
+  // }
+
+  const handleListMouseUp: MouseEventHandler = (event): void => {
+    const endClientX = event.clientX
+    if ((endClientX + 300) < startNewTransform) handleSlideRight()
+    if (endClientX > (startNewTransform + 300)) handleSlideLeft()
+  }
+
+  useEffect(() => {
+    setWindowWidth(() => window.innerWidth)
+  }, [])
 
   return (
     <>
@@ -91,18 +119,22 @@ const Intro = () => {
             <div className={css.introSlidersContainer}>
               <ul
                 className={css.introSlidersContainer__list}
-                style={{transform: `translateX(${sliderCounter === sliders.length - 1 ? -(934 + 100) * sliders.length + 1920 : -((934 + 100) - 300) * sliderCounter}px)`}}
+                style={{transform: `translateX(${sliderCounter === sliders.length - 1 ? -(Slide1.width + faultMargin) * sliders.length + windowWidth - 17 : -((Slide1.width + faultMargin) - randomOffset) * sliderCounter}px)`}}
+                onMouseDown={handleListMouseDown}
+                // onMouseMove={handleListMouseMove}
+                onMouseUp={handleListMouseUp}
               >
                 {sliders &&
                 sliders.map((slide) => (
                   <li
                     key={slide.id}
-                    className={css.introSlidersContainer__item}
+                    className={`${css.introSlidersContainer__item}${slide.id === sliders[sliderCounter].id ? ` ${css.activeSlide}` : ''}`}
                   >
                     <Image
                       src={Slide1}
                       alt={`Slide ${slide.id}`}
                       layout="fixed"
+                      draggable={false}
                     />
                   </li>
                 ))}

@@ -48,6 +48,7 @@ $mainBackgroundColor: #f9f1e7;
 
   &__item {
     cursor: pointer;
+    position: relative;
 
     display: flex;
     align-items: center;
@@ -58,13 +59,15 @@ $mainBackgroundColor: #f9f1e7;
 
     border-radius: 50%;
 
+    background-color: $mainBackgroundColor;
+
     margin: 0 6px;
 
-    border-width: 0;
-    border-style: solid;
-    border-color: $orange;
+    //border-width: 0;
+    //border-style: solid;
+    //border-color: $orange;
 
-    transition: all 0.2s ease;
+    transition: all 0.4s ease;
 
     > span {
       width: 11px;
@@ -74,11 +77,33 @@ $mainBackgroundColor: #f9f1e7;
 
       border-radius: inherit;
 
-      transition: all 0.2s ease;
+      transition: all 0.5s ease;
+    }
+
+    &:after {
+      content: '';
+
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
+
+      width: 100%;
+      height: 100%;
+
+      border-radius: 50%;
+
+      background-color: $orange;
+
+      transform: scale(0.9);
+
+      transition: all .5s ease;
     }
 
     &.activeDot {
-      border-width: 1px;
+      &:after {
+        transform: scale(1.15);
+      }
 
       > span {
         background-color: $orange;
@@ -113,8 +138,14 @@ $mainBackgroundColor: #f9f1e7;
 
     margin: 0 4px;
 
+    transition: all .2s ease;
+
     &Left {
       background-color: rgba($orange, 0.3);
+    }
+
+    &:hover {
+      transform: scale(1.1);
     }
   }
 }
@@ -122,7 +153,7 @@ $mainBackgroundColor: #f9f1e7;
 .introSlidersContainer {
   position: relative;
 
-  margin-top: 50px;
+  margin-top: 22px;
 
   &__list {
     position: absolute;
@@ -136,6 +167,20 @@ $mainBackgroundColor: #f9f1e7;
   }
 
   &__item {
-    margin: 50px;
+    pointer-events: none;
+    margin: 16px;
+
+    //transition: all .5s ease;
+    //
+    //&.activeSlide {
+    //  transform: scale(1.1);
+    //}
+
+    img {
+      pointer-events: none;
+    }
   }
+}
+
+.activeSlide {
 }
